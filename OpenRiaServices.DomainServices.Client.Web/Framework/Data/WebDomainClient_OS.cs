@@ -23,7 +23,7 @@ namespace OpenRiaServices.DomainServices.Client
     /// Default <see cref="DomainClient"/> implementation using WCF
     /// </summary>
     /// <typeparam name="TContract">The contract type.</typeparam>
-    public sealed class WebDomainClient<TContract> : WebApiDomainClient where TContract : class
+    public class WebDomainClient<TContract> : WebApiDomainClient where TContract : class
     {
         internal const string QueryPropertyName = "DomainServiceQuery";
         internal const string IncludeTotalCountPropertyName = "DomainServiceIncludeTotalCount";

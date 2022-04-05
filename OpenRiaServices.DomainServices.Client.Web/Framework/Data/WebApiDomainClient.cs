@@ -99,12 +99,14 @@ namespace OpenRiaServices.DomainServices.Client.PortableWeb
         private static readonly DataContractSerializer s_faultSerializer = new DataContractSerializer(typeof(DomainServiceFault));
         Dictionary<Type, DataContractSerializer> _serializerCache;
 
+        protected virtual string EndpointSuffix => "/binary/";
+
         public WebApiDomainClient(Type serviceInterface, Uri baseUri, HttpMessageHandler handler)
         {
             ServiceInterfaceType = serviceInterface;
             HttpClient = new HttpClient(handler, disposeHandler: false)
             {
-                BaseAddress = new Uri(baseUri.AbsoluteUri + "/binary/", UriKind.Absolute),
+                BaseAddress = new Uri(baseUri.AbsoluteUri + EndpointSuffix, UriKind.Absolute),
             };
 
             lock (s_globalSerializerCache)
@@ -396,13 +398,24 @@ namespace OpenRiaServices.DomainServices.Client.PortableWeb
                         // Validate that we are no on ****Result node
                         VerifyReaderIsAtNode(reader, operationName, "Result");
 
-                        var serializer = GetSerializer(returnType);
-                        return serializer.ReadObject(reader, verifyObjectName: false);
+                        return DeserializeResult(returnType, reader);
                     }
 
                     return null;
                 }
             }
+        }
+
+        /// <summary>
+        /// Deserializes the content of the current node using DataContractSerializer
+        /// </summary>
+        /// <param name="returnType"></param>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        protected virtual object DeserializeResult(Type returnType, System.Xml.XmlDictionaryReader reader)
+        {
+            var serializer = GetSerializer(returnType);
+            return serializer.ReadObject(reader, verifyObjectName: false);
         }
 
         /// <summary>
