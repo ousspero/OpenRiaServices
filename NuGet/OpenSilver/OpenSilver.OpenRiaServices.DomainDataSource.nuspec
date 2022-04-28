@@ -2,11 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>OpenSilver.OpenRiaServices.DomainDataSource</id>
-    <version>4.5.1</version>
+    <version>$PackageVersion$</version>
     <title>Open RIA Services DomainDataSource</title>
     <authors>Userware</authors>
     <license type="expression">Apache-2.0</license>
     <projectUrl>https://github.com/OpenSilver/OpenRiaServices</projectUrl>
+    <repository type="git" url="$RepositoryUrl$" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>OpenSilver.OpenRiaServices.DomainDataSource provides the DomainDataSource control for OpenSilver, providing a declarative model for binding UI controls to a DomainContext.</description>
     <summary>Open RIA Services - DomainDataSource control - For use in OpenSilver projects</summary>
@@ -16,7 +17,7 @@
     <tags>WCF RIA Services RIAServices Silverlight DomainDataSource OpenRIAServices OpenSilver</tags>
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="OpenSilver.OpenRiaServices.Client.Core"  version="$version$"/>
+        <dependency id="OpenSilver.OpenRiaServices.Client.Core"  version="$PackageVersion$"/>
       </group>
     </dependencies>
   </metadata>

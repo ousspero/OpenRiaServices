@@ -2,11 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>OpenSilver.OpenRiaServices.Client</id>
-    <version>5.0.0</version>
+    <version>$PackageVersion$</version>
     <title>Open RIA Services Full Client</title>
     <authors>Userware</authors>
     <license type="expression">Apache-2.0</license>
     <projectUrl>https://github.com/OpenSilver/OpenRiaServices</projectUrl>
+    <repository type="git" url="$RepositoryUrl$" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>OpenRiaServices.Client is the full OpenRiaServices client including code generation in a single package. This version of OpenRiaServices is designed for use in OpenSilver projects (cf. https://opensilver.net/).</description>
     <summary>Open RIA Services - Full client - For use in OpenSilver projects</summary>
@@ -16,8 +17,7 @@
     <tags>WCF RIA Services RIAServices OpenRiaServices OpenSilver Silverlight</tags>
     <dependencies>
       <group>
-        <dependency id="OpenSilver" version="1.0.0" />
-        <dependency id="OpenSilver.OpenRiaServices.Client.Core" version="$version$"/>
+        <dependency id="OpenSilver.OpenRiaServices.Client.Core" version="$PackageVersion$"/>
         <dependency id="OpenRiaServices.Client.CodeGen" version="5.0.0-preview0003"/>
       </group>
     </dependencies>

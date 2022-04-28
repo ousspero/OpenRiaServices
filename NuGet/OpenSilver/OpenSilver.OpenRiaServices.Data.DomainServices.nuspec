@@ -2,11 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>OpenSilver.OpenRiaServices.Data.DomainServices</id>
-    <version>4.6.0</version>
+    <version>$PackageVersion$</version>
     <title>Open RIA Services Data.DomainServices</title>
     <authors>Userware</authors>
     <license type="expression">Apache-2.0</license>
     <projectUrl>https://github.com/OpenSilver/OpenRiaServices</projectUrl>
+    <repository type="git" url="$RepositoryUrl$" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>OpenSilver.OpenRiaServices.Data.DomainServices provides the archived OpenRiaServices.Data.DomainServices library to OpenSilver.</description>
     <summary>Open RIA Services - Data.DomainServices - For use in OpenSilver projects</summary>
@@ -16,7 +17,7 @@
     <tags>WCF RIA Services RIAServices Silverlight OpenRIAServices OpenSilver</tags>
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="OpenSilver.OpenRiaServices.Client.Core" version="$version$"/>
+        <dependency id="OpenSilver.OpenRiaServices.Client.Core" version="$PackageVersion$"/>
       </group>
     </dependencies>
   </metadata>

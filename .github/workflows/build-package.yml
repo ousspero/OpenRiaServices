@@ -1,11 +1,18 @@
 name: OpenRia Build
+env:
+  solution: 'OpenRiaServices.OpenSilver.sln'
+  opensilver-package-source: 'https://www.myget.org/F/opensilver/api/v3/index.json'
 on:
   # We run the process manually and pass the version of actual OpenSilver
   workflow_dispatch:
     inputs:
       opensilver-version:
         description: 'OpenSilver package version'
+        default: 'latest'
         required: true
+  schedule:
+  # Every Sunday at 5AM UTC
+    - cron: "0 5 * * 0"
 jobs:
   OpenRia-Build:
     runs-on: windows-latest
@@ -16,10 +23,50 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.101'
-          source-url: https://nuget.pkg.github.com/OpenSilver/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Clone repo
         uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
+      - name: Fill vars
+        id: vars
+        run: |
+          $version = "${{ github.event.inputs.opensilver-version }}"
+          if ($version -eq "latest") {
+            $version = nuget list -Source ${{ env.opensilver-package-source }} -Prerelease | ? { $_ -match "^OpenSilver\s+(.*)" } | ForEach { $_.split(" ")[1] }
+          }
+          echo "Version: $version"
+          echo "::set-output name=opensilver-version::$version"
+          echo "::set-output name=suffix::$(date +'%Y-%m-%d-%H%M%S')-${{ env.GITHUB_SHA_SHORT }}"
+      - name: Remove OpenSilver packages for all projects
+        working-directory: src
+        run: |
+          foreach ($project in dotnet sln ${{ env.solution }} list | Select-Object -Skip 2) {
+            dotnet remove $project package OpenSilver
+            if (-not $?) {throw "Failed to remove package"}
+          }
+        env:
+          DOTNET_NOLOGO: true
+      - name: Add OpenSilver package for all projects
+        working-directory: src
+        run: |
+          foreach ($project in dotnet sln ${{ env.solution }} list | Select-Object -Skip 2) {
+            dotnet add $project package OpenSilver -v ${{ steps.vars.outputs.opensilver-version }}
+            if (-not $?) {throw "Failed to add package"}
+          }
+        env:
+          DOTNET_NOLOGO: true
+      - name: Build solution
+        working-directory: src
+        run: |
+          msbuild ${{ env.solution }} -p:Configuration=Release -clp:ErrorsOnly -restore
+      - name: Build packages
+        working-directory: NuGet
+        run: |
+          .\Pack-Client-OpenSilver.ps1 -Version 1.0.0-private-${{ steps.vars.outputs.suffix }} -OpenSilverDependencyVersion ${{ steps.vars.outputs.opensilver-version }} -RepositoryUrl https://github.com/${{ env.GITHUB_REPOSITORY_OWNER_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}
+      - name: Upload packages
+        run: |
+           dotnet nuget push "NuGet\bin\opensilver\*.nupkg" -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/${{ env.GITHUB_REPOSITORY_OWNER_PART }}/index.json
+      - name: Upload packages to MyGet
+        if: github.repository_owner == 'OpenSilver'
+        run: |
+           dotnet nuget push "NuGet\bin\opensilver\*.nupkg" -k ${{ secrets.MYGET_TOKEN }} -s https://www.myget.org/F/opensilver/api/v2/package
