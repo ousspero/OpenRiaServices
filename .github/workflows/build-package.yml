@@ -31,7 +31,7 @@ jobs:
         id: vars
         run: |
           $version = "${{ github.event.inputs.opensilver-version }}"
-          if ($version -eq "latest") {
+          if ($version -eq "latest" -or $version -eq "") {
             $version = nuget list -Source ${{ env.opensilver-package-source }} -Prerelease | ? { $_ -match "^OpenSilver\s+(.*)" } | ForEach { $_.split(" ")[1] }
           }
           echo "Version: $version"
