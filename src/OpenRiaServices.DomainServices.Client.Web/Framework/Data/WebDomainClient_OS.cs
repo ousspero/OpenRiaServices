@@ -278,11 +278,12 @@ namespace OpenRiaServices.DomainServices.Client
                 var header = new Web.Internal.WcfQueryHeaderInspector.QueryOptionsHeader(queryParts, _includeTotalCount);
                 headers = new MessageHeader[] { header };
             }
-
+            string name = method.Name.Substring(5); // skips "Begin" 
             return INTERNAL_WebMethodsCaller.BeginCallWebMethod<TContract>(
                 channel.Endpoint.Address.Uri.AbsoluteUri,
-                method.Name.Substring(5), // skips "Begin"
+                name, // skips "Begin"
                 null,
+                channel.Endpoint.Contract.Operations.Find(name).KnownTypes,
                 GetEnvelopeHeaders(headers?.ToList()),
                 parameters,
                 "1.1");
