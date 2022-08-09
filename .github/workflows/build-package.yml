@@ -3,6 +3,7 @@ env:
   solution: 'OpenRiaServices.OpenSilver.sln'
   opensilver-package-source: 'https://www.myget.org/F/opensilver/api/v3/index.json'
   next-release-version: '1.1.0'
+  suffix: 'rc'
 on:
   # We run the process manually and pass the version of actual OpenSilver
   workflow_dispatch:
@@ -28,12 +29,21 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
+      - name: Add Rc package source
+        run: |
+          nuget sources Add -Name opensilver-private-rc -Source "${{ secrets.MYGET_PRIVATE_RC_FEED_V3 }}" -username "${{ secrets.MYGET_PRIVATE_USERNAME }}" -password "${{ secrets.MYGET_PRIVATE_APIKEY }}"
+        if: env.suffix == 'rc'
       - name: Fill vars
         id: vars
         run: |
           $version = "${{ github.event.inputs.opensilver-version }}"
+          $source = "${{ env.opensilver-package-source }}"
+          $suffix = "${{ env.suffix }}"
+          if ($suffix -eq "rc") {
+            $source = "${{ secrets.MYGET_PRIVATE_RC_FEED_V3 }}"
+          }
           if ($version -eq "latest") {
-            $version = nuget list -Source ${{ env.opensilver-package-source }} -Prerelease | ? { $_ -match "^OpenSilver\s+(.*)" } | ForEach { $_.split(" ")[1] }
+            $version = nuget list -Source $source -Prerelease | ? { $_ -match "^OpenSilver\s+(.*)" } | ForEach { $_.split(" ")[1] }
           }
           echo "Version: $version"
           echo "::set-output name=opensilver-version::$version"
@@ -57,14 +67,34 @@ jobs:
       - name: Build solution
         run: |
           msbuild ${{ env.solution }} -p:Configuration=Release -clp:ErrorsOnly -restore
-      - name: Build packages
+      - name: Format Version Suffix
+        id: format-suffix
+        run: echo "::set-output name=suffix::$(date +'%Y-%m-%d-%H%M%S')-${{ env.GITHUB_SHA_SHORT }}"
+      - name: Format Package Version
+        id: format-version
+        run: echo "::set-output name=version::${{ env.next-release-version }}-${{env.suffix}}-${{ steps.format-suffix.outputs.suffix }}"
+      - name: Pack packages
         working-directory: OpenRiaServices.NuGet
         run: |
-          .\Pack-Client-OS.ps1 -Version ${{ env.next-release-version }}-preview-${{ steps.vars.outputs.suffix }} -OpenSilverDependencyVersion ${{ steps.vars.outputs.opensilver-version }} -RepositoryUrl https://github.com/${{ env.GITHUB_REPOSITORY_OWNER_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}
+          .\Pack-Client-OS.ps1 -Version ${{ steps.format-version.outputs.version }} -OpenSilverDependencyVersion ${{ steps.vars.outputs.opensilver-version }} -RepositoryUrl https://github.com/${{ env.GITHUB_REPOSITORY_OWNER_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}
       - name: Upload packages
         run: |
            dotnet nuget push "OpenRiaServices.NuGet\bin\opensilver\*.nupkg" -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/${{ env.GITHUB_REPOSITORY_OWNER_PART }}/index.json
       - name: Upload packages to MyGet
-        if: github.repository_owner == 'OpenSilver'
+        if: github.repository_owner == 'OpenSilver' && env.suffix == 'preview'
         run: |
            dotnet nuget push "OpenRiaServices.NuGet\bin\opensilver\*.nupkg" -k ${{ secrets.MYGET_TOKEN }} -s https://www.myget.org/F/opensilver/api/v2/package
+      - name: Upload packages to MyGet RC
+        if: github.repository_owner == 'OpenSilver' && env.suffix == 'rc'
+        run: |
+           dotnet nuget push "OpenRiaServices.NuGet\bin\opensilver\*.nupkg" -k ${{ secrets.MYGET_PRIVATE_RC_FEED_TOKEN }} -s ${{ secrets.MYGET_PRIVATE_RC_FEED }}
+      - name: Pack OpenRia Final Release
+        working-directory: OpenRiaServices.NuGet
+        run: |
+          .\Pack-Client-OS.ps1 -Version ${{ env.next-release-version }} -OpenSilverDependencyVersion ${{ env.next-release-version }} -RepositoryUrl https://github.com/${{ env.GITHUB_REPOSITORY_OWNER_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}
+        if: env.suffix == 'rc'
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: OpenRia4.6
+          path: "OpenRiaServices.NuGet/bin/OpenSilver"
