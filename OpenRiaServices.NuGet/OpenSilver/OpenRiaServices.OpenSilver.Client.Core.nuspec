@@ -14,15 +14,14 @@
     </description>
     <summary>Open RIA Services - client assemblies and references. - For use in OpenSilver projects</summary>
     <!--<releaseNotes>For release notes see https://github.com/OpenRIAServices/OpenRiaServices/releases</releaseNotes>-->
-    <copyright>Copyright (c) 2020, Userware. All rights reserved.</copyright>
+    <copyright>Copyright (c) 2022, Userware. All rights reserved.</copyright>
     <language>en-US</language>
     <tags>WCF RIA Services RIAServices Silverlight OpenRiaServices OpenSilver</tags>
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="System.ComponentModel.Annotations" version="4.7.0" />
-        <dependency id="System.ServiceModel.Http" version="4.7.0" />
-        <dependency id="Newtonsoft.Json" version="12.0.3" />
         <dependency id="OpenSilver" version="$OpenSilverDependencyVersion$" />
+        <dependency id="System.ServiceModel.Http" version="4.10.0" />
+        <dependency id="Newtonsoft.Json" version="12.0.3" />
       </group>
     </dependencies>
   </metadata>
