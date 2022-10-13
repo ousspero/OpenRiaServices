@@ -23,12 +23,12 @@ using System.Windows.Markup;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5163fd89-943a-4b8b-95af-efb7cde229f0")]
+[assembly: Guid("687188a2-3438-4666-8bec-b3aecef53c4e")]
 
 [assembly: CLSCompliant(true)]
 
-[assembly: XmlnsPrefix("clr-namespace:OpenRiaServices.Windows.Controls;assembly=OpenRiaServices.Controls.DomainServices", "riaControls")]
-[assembly: XmlnsDefinitionAttribute("clr-namespace:OpenRiaServices.Windows.Controls;assembly=OpenRiaServices.Controls.DomainServices", "OpenRiaServices.Controls.DomainServices")]
+//[assembly: XmlnsPrefix("clr-namespace:OpenRiaServices.Windows.Controls;assembly=OpenRiaServices.Controls.DomainServices", "riaControls")]
+//[assembly: XmlnsDefinitionAttribute("clr-namespace:OpenRiaServices.Windows.Controls;assembly=OpenRiaServices.Controls.DomainServices", "OpenRiaServices.Controls.DomainServices")]
 
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
 [assembly: InternalsVisibleTo("OpenRiaServices.Controls.DomainServices.Test, PublicKey=00240000048000009400000006020000002400005253413100040000010001006165f2d838c2494ed8ed9644fbc060f22fea4941d552916f6ca7078f64b7d5a6053ff36e63eb312fa909ae4223e8393d20eed67217e46747cebb6fa5b348738c5785568d642b0bf499f7863829242e655372773636d6c974d2d5abd97c57640893f7dd390cfd1015268ee85611f51c71068e8a15a829a97ea9dad46d1619b3b0")]
@@ -42,6 +42,6 @@ using System.Windows.Markup;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("2.0.5.0")]
+[assembly: AssemblyVersion("4.0.0.0")]
 // AssemblyFileVersion attribute is generated automatically by a custom MSBuild task inside AutomaticAssemblyVersion.targets
 //[assembly: AssemblyFileVersion("1.0.0.14")]

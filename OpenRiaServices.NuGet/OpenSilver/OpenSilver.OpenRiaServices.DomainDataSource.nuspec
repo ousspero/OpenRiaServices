@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>OpenSilver.OpenRiaServices.DomainDataSource.4.6</id>
+    <version>$PackageVersion$</version>
+    <title>Open RIA Services DomainDataSource</title>
+    <authors>Userware</authors>
+    <license type="expression">Apache-2.0</license>
+    <projectUrl>https://github.com/OpenSilver/OpenRiaServices</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>OpenSilver.OpenRiaServices.DomainDataSource provides the DomainDataSource control for OpenSilver, providing a declarative model for binding UI controls to a DomainContext.</description>
+    <summary>Open RIA Services - DomainDataSource control - For use in OpenSilver projects</summary>
+    <!-- <releaseNotes>For release notes see https://github.com/OpenRIAServices/OpenRiaServices/releases</releaseNotes> -->
+    <copyright>Copyright (c) 2021, Userware. All rights reserved.</copyright>
+    <language>en-US</language>
+    <tags>WCF RIA Services RIAServices Silverlight DomainDataSource OpenRIAServices OpenSilver</tags>
+    <dependencies>
+      <group targetFramework="netstandard2.0">
+        <dependency id="OpenSilver.OpenRiaServices.Client.Core.4.6"  version="$PackageVersion$"/>
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\bin\Release\netstandard2.0\OpenRiaServices.Controls.DomainServices.dll" target="lib\netstandard2.0\OpenRiaServices.Controls.DomainServices.dll" />
+    <file src="..\..\bin\Release\netstandard2.0\OpenRiaServices.Controls.DomainServices.pdb" target="lib\netstandard2.0\OpenRiaServices.Controls.DomainServices.pdb" />
+    <file src="..\..\bin\Release\netstandard2.0\OpenRiaServices.Controls.DomainServices.xml" target="lib\netstandard2.0\OpenRiaServices.Controls.DomainServices.xml" />
+  </files>
+</package>

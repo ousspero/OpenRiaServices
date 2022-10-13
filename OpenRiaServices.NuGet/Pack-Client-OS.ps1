@@ -1,6 +1,6 @@
 param(
     [string]$Path = ".",
-	[string[]]$Include =  @("OpenRiaServices.OpenSilver.Client.Core.nuspec", "OpenRiaServices.OpenSilver.Client.nuspec"),
+	[string[]]$Include =  @("OpenRiaServices.OpenSilver.Client.Core.nuspec", "OpenRiaServices.OpenSilver.Client.nuspec", "OpenSilver.OpenRiaServices.DomainDataSource.nuspec"),
 	[string]$Version = "1.0.0",
 	[string]$OpenSilverDependencyVersion = "1.0.0",
 	[string]$RepositoryUrl = "https://github.com/OpenSilver/OpenRiaServices",
