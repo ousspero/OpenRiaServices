@@ -10,13 +10,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OpenSilver" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenRiaServices.DomainServices.Client\Framework\OpenRiaServices.DomainServices.Client.OpenSilver.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\..\OpenRiaServices.DomainServices.Client\Framework\Data\BinaryTypeUtility.cs" Link="Common\BinaryTypeUtility.cs" />
     <Compile Include="..\..\OpenRiaServices.DomainServices.Client\Framework\Data\TypeUtility.cs" Link="Common\TypeUtility.cs" />
     <Compile Include="..\..\OpenRiaServices.DomainServices.Client\Framework\ExceptionHandlingUtility.cs" Link="Common\ExceptionHandlingUtility.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OpenRiaServices.DomainServices.Client\Framework\OpenRiaServices.DomainServices.Client.OpenSilver.csproj" />
+    <None Remove="themes\generic.xaml" />
+    <Content Include="themes\generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Content>
   </ItemGroup>
 
 </Project>
