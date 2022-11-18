@@ -8,6 +8,12 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="ILLink.Descriptors.xml">
+      <LogicalName>ILLink.Descriptors.xml</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <PackageReference Include="OpenSilver" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
