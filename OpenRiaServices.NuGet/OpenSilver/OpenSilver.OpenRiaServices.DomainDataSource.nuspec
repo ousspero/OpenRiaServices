@@ -7,6 +7,7 @@
     <authors>Userware</authors>
     <license type="expression">Apache-2.0</license>
     <projectUrl>https://github.com/OpenSilver/OpenRiaServices</projectUrl>
+    <repository type="git" url="$RepositoryUrl$" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>OpenSilver.OpenRiaServices.DomainDataSource provides the DomainDataSource control for OpenSilver, providing a declarative model for binding UI controls to a DomainContext.</description>
     <summary>Open RIA Services - DomainDataSource control - For use in OpenSilver projects</summary>
