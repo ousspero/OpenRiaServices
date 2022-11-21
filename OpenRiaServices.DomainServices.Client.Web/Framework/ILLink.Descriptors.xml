@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!--https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/configure-linker-->
-<!--https://github.com/dotnet/linker/blob/main/docs/data-formats.md-->
+<!-- https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/configure-linker -->
+<!-- https://github.com/dotnet/linker/blob/main/docs/data-formats.md -->
 <linker>
     <assembly fullname="System.Private.DataContractSerialization" preserve="all"/>
 </linker>
