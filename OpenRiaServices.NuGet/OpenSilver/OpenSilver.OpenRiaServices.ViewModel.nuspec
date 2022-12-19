@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>OpenSilver.OpenRiaServices.ViewModel.4.6</id>
+    <version>$PackageVersion$</version>
+    <title>Open RIA Services ViewModel Extensions</title>
+    <authors>Userware</authors>
+    <license type="expression">Apache-2.0</license>
+    <projectUrl>https://github.com/OpenSilver/OpenRiaServices</projectUrl>
+    <repository type="git" url="$RepositoryUrl$" />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Open RIA Services Toolkit - Silverlight ViewModel (MVVM) features</description>
+    <summary>Open RIA Services Toolkit - Silverlight ViewModel (MVVM) features</summary>
+    <copyright>Copyright (c) 2021, Userware. All rights reserved.</copyright>
+    <language>en-US</language>
+    <tags>WCF RIA Services RIAServices Silverlight ViewModel MVVM OpenRiaServices</tags>
+    <dependencies>
+      <group targetFramework="netstandard2.0">
+        <dependency id="OpenSilver.OpenRiaServices.Client.Core.4.6"  version="$PackageVersion$"/>
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\bin\Release\netstandard2.0\OpenRiaServices.Data.DomainServices.dll" target="lib\netstandard2.0\OpenRiaServices.Data.DomainServices.dll" />
+    <file src="..\..\bin\Release\netstandard2.0\OpenRiaServices.Data.DomainServices.pdb" target="lib\netstandard2.0\OpenRiaServices.Data.DomainServices.pdb" />
+    <file src="..\..\bin\Release\netstandard2.0\OpenRiaServices.Data.DomainServices.xml" target="lib\netstandard2.0\OpenRiaServices.Data.DomainServices.xml" />
+  </files>
+</package>
