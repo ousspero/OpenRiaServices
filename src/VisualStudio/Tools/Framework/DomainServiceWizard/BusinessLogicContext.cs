@@ -418,10 +418,12 @@ namespace OpenRiaServices.VisualStudio.DomainServices.Tools
             // If we exposed an OData endpoint, add a reference to the OData assembly
             // so it appears in the server project, allowing the user to chose 
             // CopyLocal=true for bin deploy scenarios
-            if (this.IsODataEndpointEnabled)
-            {
-                codeGenContext.AddReference(typeof(ODataEndpointFactory).Assembly.FullName);
-            }
+            
+            //TODO: Temporarily comment this out as it throws exception
+            //if (this.IsODataEndpointEnabled)
+            //{
+            //    codeGenContext.AddReference(typeof(ODataEndpointFactory).Assembly.FullName);
+            //}
         }
 
         /// <summary>
