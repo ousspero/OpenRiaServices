@@ -3,6 +3,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <DefineConstants>$(DefineConstants);SERVERFX;WIZARD;DBCONTEXT;VS14</DefineConstants>
     <AssemblyName>OpenRiaServices.VisualStudio.DomainServices.Tools.14.0</AssemblyName>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <VsVersion Condition=" '$(VsVersion)' == '' ">14.0</VsVersion>
     <TargetFramework>net46</TargetFramework>
     <PublishUrl>publish\</PublishUrl>
